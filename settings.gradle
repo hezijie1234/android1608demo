@@ -1,2 +1,2 @@
-include ':app', ':day32_dagger2_demo'//, ':day32_dependency_injection_demo', ':day32_butter_knife_demo'//, ':mvpdemo', ':day30_baidu_map_location_demo', ':day31_project_mvp_demo'
+include ':app', ':day32_dagger2_demo', ':day33_okhttp_get_demo', ':day33_okhttp_post_demo', ':day33_okhttp_upload_demo'//, ':day32_dependency_injection_demo', ':day32_butter_knife_demo'//, ':mvpdemo', ':day30_baidu_map_location_demo', ':day31_project_mvp_demo'
 include ':refreshlibrary'
