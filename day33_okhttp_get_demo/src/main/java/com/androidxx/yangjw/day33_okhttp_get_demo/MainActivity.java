@@ -1,6 +1,8 @@
 package com.androidxx.yangjw.day33_okhttp_get_demo;
 
 import android.app.Dialog;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
         OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
         //创建一个Request对象
         Request request = new Request.Builder()
-                .url("http://www.1688wan.com/majax.action?method=getJtkaifu")//配置请求地址
+//                .url("http://www.1688wan.com/majax.action?method=getJtkaifu")//配置请求地址
+                .url("http://192.168.53.18:8080/Android1608/login?name=zhangsan&age=23")//配置请求地址
                 .get()//表示Get请求，默认就是Get请求
                 .build();
         //执行Request
