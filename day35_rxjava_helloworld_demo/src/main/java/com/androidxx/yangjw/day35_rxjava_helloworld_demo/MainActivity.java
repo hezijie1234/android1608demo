@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import rx.Observable;
 import rx.Observer;
@@ -18,6 +19,8 @@ import rx.Subscriber;
  * 4、关联观察者和被观察者
  */
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "androidxx";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
              */
             @Override
             public void onCompleted() {
-
+                Log.i(TAG, "onCompleted: ");
             }
 
             /**
@@ -44,7 +47,10 @@ public class MainActivity extends AppCompatActivity {
              */
             @Override
             public void onError(Throwable e) {
-
+                Log.i(TAG, "onError: ");
+                e.printStackTrace();
+                Toast.makeText(MainActivity.this, "出错了", Toast.LENGTH_SHORT).show();
+                
             }
 
             /**
@@ -67,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void call(Subscriber<? super String> subscriber) {
                 subscriber.onNext("zhangsan");
-                subscriber.onCompleted();
+                throw new NullPointerException("这是人为的一个异常");
+//                subscriber.onCompleted();
             }
         };
 
