@@ -1,5 +1,6 @@
 package com.androidxx.yangjw.day34_liwushuo_demo.model.home;
 
+import com.androidxx.yangjw.day34_liwushuo_demo.model.home.bean.BannerBean;
 import com.androidxx.yangjw.day34_liwushuo_demo.model.home.bean.SelectionBean;
 
 /**
@@ -14,7 +15,10 @@ public interface IHomeModel {
      */
     void querySelectionList(int pageno, IHomeModelCallBack callBack);
 
+    void queryBanner(final IHomeModelCallBack callBack);
+
     public interface IHomeModelCallBack{
         void selectionDatas(SelectionBean bean);
+        void bannerData(BannerBean bannerBean);
     }
 }
