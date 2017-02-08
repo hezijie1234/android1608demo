@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ConvenientBanner convenientBanner;
     private List<Integer> resIds = new ArrayList<>();
+    private List<String> imageUrls = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
         resIds.add(R.drawable.a4);
         resIds.add(R.drawable.abc);
 
+        imageUrls.add("http://img01.liwushuo.com/image/170125/bdr55eyn6.jpg-w720");
+        imageUrls.add("http://img03.liwushuo.com/image/170208/r6qv9ib9y.jpg-w720");
+        imageUrls.add("http://img02.liwushuo.com/image/170205/ezumphlki.jpg-w720");
+        imageUrls.add("http://img03.liwushuo.com/image/170206/grwd1qvvy.jpg-w720");
+
         //自定义你的Holder，实现更多复杂的界面，不一定是图片翻页，其他任何控件翻页亦可。
         convenientBanner.setPages(
                 new CBViewHolderCreator<LocalImageHolderView>() {
@@ -39,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     public LocalImageHolderView createHolder() {
                         return new LocalImageHolderView();
                     }
-                }, resIds) //localImages是需要显示的图片的链接
+                }, imageUrls) //localImages是需要显示的图片的链接
                 //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
                 .setPageIndicator(new int[]{R.drawable.btn_check_disabled_nightmode, R.drawable.btn_check_disabled})
                 //设置指示器的方向
@@ -47,12 +55,22 @@ public class MainActivity extends AppCompatActivity {
         //设置翻页的效果，不需要翻页效果可用不设
         //.setPageTransformer(Transformer.DefaultTransformer);    集成特效之后会有白屏现象，新版已经分离，如果要集成特效的例子可以看Demo的点击响应。
 //        convenientBanner.setManualPageable(false);//设置不能手动影响
+
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        convenientBanner.startTurning(2000);
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        convenientBanner.stopTurning();
+    }
 
-
-    public class LocalImageHolderView implements Holder<Integer> {
+    public class LocalImageHolderView implements Holder<String> {
         private ImageView imageView;
 
         /**
@@ -74,8 +92,11 @@ public class MainActivity extends AppCompatActivity {
          * @param data
          */
         @Override
-        public void UpdateUI(Context context, final int position, Integer data) {
-            imageView.setImageResource(data);
+        public void UpdateUI(Context context, final int position, String data) {
+//            imageView.setImageResource(data);
+            Picasso.with(MainActivity.this).load(data).into(imageView);
         }
     }
+
+
 }
