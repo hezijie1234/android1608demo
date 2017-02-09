@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         AppService appService = retrofit.create(AppService.class);
-        appService.querySelectionDatas()
+        //?ad=2&gender=1&generation=2&limit=20&offset=0
+        appService.querySelectionDatas(101,2,1,2,20,0)
                .map(new Func1<SelectionBean, List<SelectionBean.DataBean.ItemsBean>>() {
                    @Override
                    public List<SelectionBean.DataBean.ItemsBean> call(SelectionBean selectionBean) {
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(new Observer<Boolean>() {
                     @Override
                     public void onCompleted() {
-                        Toast.makeText(MainActivity.this, "完成", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "完成" + datas.size(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
